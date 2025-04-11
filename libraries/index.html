@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>作品集</title>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+    <script src="libraries/p5.min.js"></script>
+    <script src="libraries/p5.sound.min.js"></script>
+  </head>
+
+  <body>
+    <!-- 選單 -->
+    <ul class="menu" id="menu">
+      <li><a href="#" onclick="hideIframe()">首頁</a></li>
+      <li><a href="#about">自我介紹</a></li>
+      <li class="dropdown">
+        <a href="#portfolio">作品集</a>
+        <ul class="submenu">
+          <li><a href="#" onclick="loadIframe('https://elisa9499.github.io/20250328/')">第一周</a></li>
+          <li><a href="#" onclick="loadIframe('https://hackmd.io/hwqIwLHVRSSSuwEyS9eEOA')">第二周</a></li>
+          <li><a href="#" onclick="loadIframe('https://hackmd.io/@elisaa/SyDd2kuikl')">第三周</a></li>
+          <li><a href="#" onclick="loadIframe('https://hackmd.io/@elisaa/SyeeY7WhJx')">第四周</a></li>
+        </ul>
+      </li>
+      <li><a href="#quiz">測驗卷</a></li>
+      <li><a href="#videos">教學影片</a></li>
+    </ul>
+
+    <!-- iframe 用於嵌入網頁 -->
+    <iframe id="content-frame" src="" frameborder="0"></iframe>
+
+    <script src="sketch.js"></script>
+    <script>
+      // 動態加載 iframe 的內容
+      function loadIframe(url) {
+        const iframe = document.getElementById('content-frame');
+        iframe.src = url;
+        iframe.style.display = 'block'; // 顯示 iframe
+      }
+
+      // 隱藏 iframe
+      function hideIframe() {
+        const iframe = document.getElementById('content-frame');
+        iframe.src = ''; // 清空 iframe 的內容
+        iframe.style.display = 'none'; // 隱藏 iframe
+      }
+
+      // 頁面加載時隱藏選單
+      window.onload = function () {
+        const menu = document.getElementById('menu');
+        menu.style.transform = 'translateY(-100%)'; // 隱藏選單（滑出視窗上方）
+      };
+
+      // 根據滑鼠 y 座標顯示或隱藏選單
+      window.onmousemove = function (event) {
+        const menu = document.getElementById('menu');
+        if (event.clientY < 250) {
+          menu.style.transform = 'translateY(0)'; // 顯示選單（滑入）
+        } else {
+          menu.style.transform = 'translateY(-100%)'; // 隱藏選單（滑出）
+        }
+      };
+    </script>
+  </body>
+</html>
